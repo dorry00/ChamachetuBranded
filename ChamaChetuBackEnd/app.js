@@ -6,6 +6,7 @@ dotenv.config();
 const authenticationRoute = require("./routes/auth");
 const groupRoute = require("./routes/groups");
 const feedbackRoute = require("./routes/feedbacks");
+const paymentRoute = require("./routes/payment")
 
 //accept json data
 
@@ -27,7 +28,9 @@ mongoose
 app.use("/api/auth", authenticationRoute);
 app.use("/api/groups", groupRoute);
 app.use("/api/feedback", feedbackRoute);
+app.use("/api/payments", paymentRoute)
 
-app.listen(process.env.PORT || 8000, () => {
-  console.log(`Backend at 8000`);
+const PORT = 5000
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Backend at ${PORT} `);
 });

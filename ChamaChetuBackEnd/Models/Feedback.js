@@ -19,4 +19,4 @@ const FeedbackSchema = new mongoose.Schema({
 
 } ,  { timestamps: true }, { collection: "feedback" })
 
-module.exports = mongoose.Schema("Feedback",FeedbackSchema)
+module.exports = mongoose.model("Feedback",FeedbackSchema)

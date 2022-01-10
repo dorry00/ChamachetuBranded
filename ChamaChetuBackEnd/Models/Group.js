@@ -39,4 +39,4 @@ const GroupSchema = new mongoose.Schema({
 
 } ,  { timestamps: true }, { collection: "groups" })
 
-module.exports = mongoose.Schema("Groups", GroupSchema)
+module.exports = mongoose.model("Group", GroupSchema)

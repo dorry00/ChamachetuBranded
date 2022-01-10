@@ -1,92 +1,115 @@
-const router = require("express").Router();
+const router = require('express').Router()
 const {
   verifyToken,
   verifyTokenAndAuthorisation,
   verifyTokenAndAdmin,
-} = require("./verificationToken");
-const Group = require("../Models/Group");
-const { body, validationResult } = require("express-validator");
+} = require('./verificationToken')
+const Group = require('../Models/Group')
+const user = require("../Models/User")
+const { body, validationResult } = require('express-validator')
 
 //create a group
 
 router.post(
-  "/create",
-  body("groupname").notEmpty().withMessage("A group needs a name"),
-  body("groupname").isEmail().withMessage("Invalid Email"),
-  body("groupname").notEmpty().withMessage("name required"),
-  body("groupname").isEmail().withMessage("Invalid Email"),
-  body("groupname").notEmpty().withMessage("name required"),
+  '/create',
+  body('groupname').notEmpty().withMessage('A group needs a name'),
+  body('description')
+    .notEmpty()
+    .withMessage('description is required required'),
   verifyTokenAndAuthorisation,
   async (req, res) => {
     //check for validation errors
-    const errors = validationResult(req);
+    const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array() })
     }
-    const newGroup = new Group(req.body);
+    const newGroup = new Group(req.body)
 
     try {
-      const savedGroup = await newGroup.save();
-      res.status(200).json(savedGroup);
+      const savedGroup = await newGroup.save()
+      res.status(200).json(savedGroup)
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json(err)
     }
-  }
-);
+  },
+)
 
 //update one group
 
-router.put("/:id", verifyTokenAndAuthorisation, async (req, res) => {
+router.put('/:id', verifyTokenAndAuthorisation, async (req, res) => {
   try {
     const updatedGroup = await Group.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
-      { new: true }
-    );
+      { new: true },
+    )
 
-    return res.status(200).json(updatedGroup);
+    return res.status(200).json(updatedGroup)
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json(err)
   }
-});
+})
 
 //delete one group
 
-router.delete("/:id", verifyTokenAndAuthorisation, async (req, res) => {
+router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
   try {
-    const deleteGroup = await Group.findByIdAndDelete(req.params.id);
-    return res.status(200).json("group successfully deleted");
+    await Group.findByIdAndDelete(req.params.id)
+    return res.status(200).json('group successfully deleted')
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json(err)
   }
-});
+})
 
 //get one group
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const group = await Group.findById(req.params.id);
+    const group = await Group.findById(req.params.id)
     if (!group) {
-      return res.status(404).json("group does not exist");
+      return res.status(404).json('group does not exist')
     }
 
-    return res.status(200).json(group);
+    return res.status(200).json(group)
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json(err)
   }
-});
+})
 //get all the groups
-router.get("/get", verifyTokenAndAdmin, async (req, res) => {
+router.get('/get', verifyTokenAndAdmin, async (req, res) => {
   try {
-    const groups = await Group.find();
+    const groups = await Group.find()
     if (!groups) {
-      return res.status(404).json("No groups were found!");
+      return res.status(404).json('No groups were found!')
     }
 
-    return res.status(200).json(groups);
+    return res.status(200).json(groups)
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json(err)
   }
-});
+})
 
-module.exports = router;
+//get all the members of one group
+router.get("/members/:groupId", verifyTokenAndAuthorisation,async(req,res)=>{
+  try{
+    const group = await Group.findById(req.params.groupId);
+    const members = await Promise.all(
+      group.members.map((memberId) => {
+        return User.findById(friendId);
+      })
+    );
+
+    // let friendList = [];
+    // friends.map((friend) => {
+    //   const { _id, username, profilePicture } = friend;
+    //   friendList.push({ _id, username, profilePicture });
+    // });
+    // res.status(200).json(friendList)
+    
+
+  }catch(err){
+    return res.status(500).json(err)
+  }
+})
+
+module.exports = router

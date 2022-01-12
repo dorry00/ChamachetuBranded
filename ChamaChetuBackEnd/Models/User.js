@@ -32,7 +32,17 @@ const UserSchema = new mongoose.Schema({
         
     },
     groups:{
-        type:Array,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        type:Array, 
+        default:[]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    },
+    isChairPerson:{
+        type:Boolean,
+        default:false,
+
+    },
+    chairForGroups:{
+        type:Array,
+        default:[]
     },
     trusts:{
         type:Array,
@@ -47,6 +57,10 @@ const UserSchema = new mongoose.Schema({
     },
     resetLink:{
         type:String
+    },
+    isVerified:{
+        type:Boolean,
+        default:true
     }
    
 

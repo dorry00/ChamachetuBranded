@@ -5,23 +5,23 @@ const GroupSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true
-    },    
+    },
+    description:{
+        type:String,
+        required:"Group description is required"
+    },
+    logo:{
+        type:String,
+    },   
     members:{
         type:Array,
-        required:true,
+        default:[]
     },
     objectives:{
         type:Array,
         default:[]
     },
-    description:{
-        type:String,
-        required:true,
-    },
-    logo:{
-        type:String,        
-    },
-    rules:{
+     rules:{
         type:Array,
         default:[]
     }, 

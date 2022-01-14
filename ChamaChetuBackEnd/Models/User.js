@@ -1,20 +1,19 @@
 const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema({
-    userName:{
+    username:{
         type:String,
-        required:true,
+        required:"name is required",
     },
-    idNo:{
+    idnumber:{
         type:Number,
-        required:true,
+        
         unique:true
     },
     phone:{
-        type:Number,
+        type:String,
         required:true,
         unique:true
-
     },
     email:{
         type:String,
@@ -24,11 +23,10 @@ const UserSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true,
-        
     },
     gender:{
         type:String,
-        required:true,
+       
         
     },
     groups:{

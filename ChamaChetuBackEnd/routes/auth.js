@@ -9,7 +9,7 @@ router.post(
   "/register",
   body("email").isEmail().withMessage("Invalid Email"),
   body("username").notEmpty().withMessage("name required"),
-  body("idNo").notEmpty().withMessage("id number is required"),
+  body("idnumber").notEmpty().withMessage("id number is required"),
   body("email").notEmpty().withMessage("email required"),
   body("password").notEmpty().withMessage("password required"),
   body("phone").notEmpty().withMessage("phone required"),

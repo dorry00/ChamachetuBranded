@@ -5,7 +5,7 @@ const {
   verifyTokenAndAdmin,
 } = require("./verificationToken");
 const Group = require("../Models/Group");
-const user = require("../Models/User");
+const User = require("../Models/User");
 const { body, validationResult } = require("express-validator");
 
 //create a group
@@ -95,17 +95,22 @@ router.get(
    async (req, res) => {
     try {
       const group = await Group.findById(req.params.groupId);
-      const members = await Promise.all(
-        group.members.map((memberId) => {
-          return User.findById(memberId);
+      let groupmembers = await Promise.all(
+        group.members.map((_id) => {
+          return User.findById(_id);
         })
       );
-
+      
       let memberList = [];
-      members.map((member) => {
-        const { _id, username, profilePicture } =member;
-        memberList.push({ _id, userName, idNo, phone, email, profilePicture });
+      groupmembers.map((groupmember) => {
+        const {_id,username,email,phone,groups} = groupmember
+       // memberList.push({username,email });
+        console.log(username,email)
+        memberList.push({_id,username,email,phone,groups})
       });
+     
+      
+
       if (memberList.length == 0) {
         res.status(200).json("This group has no members");
       }
@@ -129,7 +134,7 @@ router.get("/chairperson/:groupId", async (req, res) => {
     if (!userChairPerson) {
       return res.status.apply(404).json("No chairPerson for this group yet");
     }
-    return res.status.apply(200).json(groupChairPerson);
+    return res.status(200).json(groupChairPerson);
   } catch (err) {
     return res.status(500).json(err);
   }
@@ -140,10 +145,17 @@ router.put("/:groupId/addmember", async (req, res) => {
  
     try {
       const group = await Group.findById(req.params.groupId)
-     
+     const user = await User.findById(req.body.userId)
+     if(!user){
+       return res.status(404).json("user not found")
+     }
       if (!group.members.includes(req.body.userId)) {
-        await user.updateOne({ $push: { members: req.body.userId } });
-        res.status(200).json("user has been successfully added");
+
+        await group.updateOne({ $push: { members: req.body.userId } });
+        await user.updateOne({$push:{groups:req.params.groupId}});
+        return res.status(200).json({
+          message:`user successfully added to ${group.groupname}`
+        });
       } else {
         res.status(403).json("User is already a member of this group");
       }
@@ -157,15 +169,17 @@ router.put("/:groupId/addmember", async (req, res) => {
 
 //remove a user from a group
 router.put("/:groupId/removemember", async(req,res)=>{
+  
   try{
+    const user = await User.findById(req.body.userId);
     const group = await Group.findById(req.params.groupId)
     if (group.members.includes(req.body.userId)) {
-      await user.updateOne({ $pull: { members: req.body.userId } });
+      await group.updateOne({ $pull: { members: req.body.userId } });
+      await user.updateOne({ $pull:{groups:req.params.groupId}});
       res.status(200).json("user has been successfully removed from the group");
     } else {
       res.status(403).json("User is not a member of this group");
     }
-
 
   }
   catch(err){

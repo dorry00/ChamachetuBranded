@@ -15,7 +15,7 @@ router.post(
   body("groupname").notEmpty().withMessage("A group needs a name"),
   body("description")
     .notEmpty()
-    .withMessage("description is required required"),
+    .withMessage("description is required"),
   verifyTokenAndAuthorisation,
   async (req, res) => {
     //check for validation errors
@@ -125,16 +125,17 @@ router.get(
 
 router.get("/chairperson/:groupId", async (req, res) => {
   try {
-    const group = await Group.findById(req.params.id);
+    const group = await Group.findById(req.params.groupId);
     if (!group) {
-      return res.status(404).json("group does not exist");
+      return res.status(404).json({success:false,message:"group does not exist"});
     }
     const chairperson = group.chairPerson;
-    const userChairPerson = await User.findById(chairperson);
-    if (!userChairPerson) {
-      return res.status.apply(404).json("No chairPerson for this group yet");
+    if(!chairperson){
+      return res.status(404).json("No chairPerson for this group yet");
+    }else{
+      const userChairPerson = await User.findById(chairperson);
     }
-    return res.status(200).json(groupChairPerson);
+   return res.status(200).json(groupChairPerson);
   } catch (err) {
     return res.status(500).json(err);
   }

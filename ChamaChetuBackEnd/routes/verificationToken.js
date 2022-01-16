@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const Group = require("../Models/Group");
+const User = require("../Models/User");
 
 //verify if the auth token is correct
 
@@ -40,21 +42,24 @@ const verifyTokenAndAdmin = (req, res, next) => {
   });
 };
 
-const verifyTokenAndGroupChair = (req, res, next) => {
-    verifyToken(req, res, () => {
-      if (req.user.isChair) {
+const verifyTokenAndGroupChair = async (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.isChairPerson) {
+      const group = await Group.findById(req.params.groupId);
+      if (group.chairPerson === req.user._id) {
         next();
       } else {
-        res.status(403).json("Only admin the chairperson is allowed to do this");
+        res.status(403).json("You are not the chair of this group");
       }
-    });
-  };
+    } else {
+      res.status(403).json("Only  the group chairs are allowed to do this");
+    }
+  });
+};
 
-
-
-module.exports= {
+module.exports = {
   verifyToken,
   verifyTokenAndAuthorisation,
   verifyTokenAndAdmin,
-  verifyTokenAndGroupChair
+  verifyTokenAndGroupChair,
 };

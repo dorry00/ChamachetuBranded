@@ -35,10 +35,7 @@ router.post("/pay", (req, res) => {
             const mpesaOnlinePasskey =
               "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
               var Timestampe = moment().format('YYYYMMDDHHmmss')
-      
-                
-            console.log(Timestampe);
-            //const Timestampe = "2020" + "10" + "12" + "16" + "04" + "00";
+
             const dataToEncode = "174379" + mpesaOnlinePasskey + Timestampe;
             let buff = Buffer.from(dataToEncode);
             let base64data = buff.toString("base64");
@@ -79,7 +76,7 @@ router.post("/pay", (req, res) => {
       
             return res.status(200).json({
               message:
-                "CONGATULATIONS!! payment request was successful from our side, wait for the pin prompt.",
+                " payment request was successful from our side, wait for the pin prompt.",
             });
           }
         );

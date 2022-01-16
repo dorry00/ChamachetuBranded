@@ -27,9 +27,21 @@ const meetingSchema = new mongoose.Schema({
         type:Array,
         default:[]        
     },
-    members:{
+    attendees:{
         type:Array,
-    }
+    },
+    meeting_start: {
+        type: String,
+        required: true
+      },
+    meeting_end: {
+        type: String,
+        required: true
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      },
    
 
 } ,  { timestamps: true }, { collection: "meetings" })

@@ -1,30 +1,34 @@
 const mongoose = require("mongoose");
 
-const merrygoroundSchema = new mongoose.Schema(
+const MerrygoroundSchema = new mongoose.Schema(
   {
     groupId: {
       type: String,
       required: true,
     },
-    useId: {
-      type: String,
-      required: true,
+     members:{
+      type:Array,
     },
-    contributionAmount: {
+    contributionAmountPerMember: {
       type: Number,
       required: true,
     },
-    phone: {
-      type: Number,
-      required: true,
-      unique: true,
+    isFinished:{
+      type:Boolean,
+      default:false
     },
-    membersToPay: {
-      type: Array,
+    isStarted:{
+      type:Boolean,
+      default:false,
+
     },
     interval: {
       type: String,
       required: true,
+    },
+    startDate:{
+      type:Date,
+      required:true
     },
     dueDate: {
       type: Date,
@@ -35,4 +39,4 @@ const merrygoroundSchema = new mongoose.Schema(
   { collection: "merrygorounds" }
 );
 
-module.exports = mongoose.Schema("MerryGoRound", merrygoroundSchema);
+module.exports = mongoose.Schema("MerryGoRound", MerrygoroundSchema);

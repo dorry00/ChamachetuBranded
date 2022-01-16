@@ -68,6 +68,37 @@ router.get("/users", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+//find the groups that the user belongs to
+
+router.get("/:userId/groups", async(req,res)=>{
+
+  try{
+    const user = await User.findById(req.params.id)
+    if(!user){
+      return res.status(404).json({message:"user does not exist"})
+    }
+    const groups = await Promise.all(
+      user.groups.map((groupId) => {
+        return User.findById(groupId);
+      })
+    );
+    let groupList = [];
+    groups.map((group) => {
+      const { _id, groupname} =group;
+      memberList.push({ _id, groupname});
+    });
+    if (groupList.length == 0) {
+      res.status(200).json("You have not joined any groups yet");
+    }
+    res.status(200).json(groupList);
+
+  }
+  catch(err){
+    res.status(500).json(err)
+  }
+})
+
+
 //get user stats
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   const date = new Date();

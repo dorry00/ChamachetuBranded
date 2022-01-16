@@ -14,9 +14,19 @@ const FeedbackSchema = new mongoose.Schema({
         type:String,
         required:true
         },
-    
+    subject:{
+        type:String,
+        default:false
+    },
+    isDeleted:{
+    type:Boolean,
+    default:false
+    },
+     deletedAt:{
+    type:Date
+}
    
 
-} ,  { timestamps: true }, { collection: "feedback" })
+} ,  { timestamps: true })
 
 module.exports = mongoose.model("Feedback",FeedbackSchema)

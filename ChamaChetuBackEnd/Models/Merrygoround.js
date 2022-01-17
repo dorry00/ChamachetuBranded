@@ -23,20 +23,25 @@ const MerrygoroundSchema = new mongoose.Schema(
 
     },
     interval: {
-      type: String,
-      required: true,
+      type:String,
+      enum:['daily','weekly','monthly'],
+      required:true
+    },
+    isOngoing:{
+      type:Boolean,
+      default:false,
+
     },
     startDate:{
       type:Date,
-      required:true
-    },
+        },
     dueDate: {
       type: Date,
-      required: true,
+     
     },
   },
   { timestamps: true },
   { collection: "merrygorounds" }
 );
 
-module.exports = mongoose.Schema("MerryGoRound", MerrygoroundSchema);
+module.exports = mongoose.model("MerryGoRound", MerrygoroundSchema);

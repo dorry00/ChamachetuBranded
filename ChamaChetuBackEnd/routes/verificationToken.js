@@ -42,10 +42,10 @@ const verifyTokenAndAdmin = (req, res, next) => {
   });
 };
 
-const verifyTokenAndGroupChair = async (req, res, next) => {
-  verifyToken(req, res, () => {
+const verifyTokenAndGroupChair = (req, res, next) => {
+    verifyToken(req, res, () => {
     if (req.user.isChairPerson) {
-      const group = await Group.findById(req.params.groupId);
+      const group = Group.findById(req.params.groupId);
       if (group.chairPerson === req.user._id) {
         next();
       } else {

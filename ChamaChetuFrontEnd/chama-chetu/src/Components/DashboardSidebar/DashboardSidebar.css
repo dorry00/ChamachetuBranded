@@ -1,0 +1,84 @@
+.dashboardSidebar{
+    border-right: 0.5px solid rgba(240, 245, 240, 0.61);
+    flex:1;
+    min-height: 100vh;
+    background-color: white;
+}
+.sidebarTop{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo{
+    font-size: 20px;
+    font-weight: bold;
+    color:#6439ff;
+}
+hr{
+    height: 0;
+    border: 0.5px solid rgba(240, 245, 240, 0.61);
+}
+.sidebarCenter{
+    padding-left: 10px;
+
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.itemTitle{
+    font-size: 10px;
+    color: #999;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+li{
+    display: flex;
+    cursor: pointer;
+    padding: 5px;
+    align-items: center;
+}
+li:hover{
+    background-color: rgb(241, 247, 247);
+}
+.icon{
+    color:rgb(53, 80, 53);
+    font-size: 20px !important;
+}
+span{
+    color: #999;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: bold;
+
+}
+.sidebarBottom{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+
+}
+.colorTheme{
+    height: 30px;
+    width: 30px;
+    margin:10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #e0e0e0;
+    box-shadow:  3px 3px 5px #cccccc,
+                 -3px -3px 5px #f4f4f4;
+
+}
+.colorTheme:nth-child(1){
+    background-color: whitesmoke;
+    
+}
+.colorTheme:nth-child(2){
+    background-color: #333;
+    
+}

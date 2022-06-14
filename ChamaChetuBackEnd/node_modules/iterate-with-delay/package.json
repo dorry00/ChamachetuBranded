@@ -1,0 +1,57 @@
+{
+  "name": "iterate-with-delay",
+  "version": "1.0.23",
+  "description": "relax! loop over array or object but with a time delay",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test/test.js"
+  },
+  "keywords": [
+    "array",
+    "object",
+    "keys",
+    "loop",
+    "iterate",
+    "delay",
+    "time",
+    "sleep",
+    "for",
+    "foreach",
+    "each",
+    "wait"
+  ],
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderofsalvation/iterate-with-delay.git"
+  },
+  "license": "ISC",
+  "gitHead": "73979062651c487872c7c9b525aef82927745d2d",
+  "bugs": {
+    "url": "https://github.com/coderofsalvation/iterate-with-delay/issues"
+  },
+  "homepage": "https://github.com/coderofsalvation/iterate-with-delay#readme",
+  "_id": "iterate-with-delay@1.0.23",
+  "_shasum": "5f3759148d0f6973c017170ae42fb6ac12beb408",
+  "_from": "iterate-with-delay@>=1.0.23 <2.0.0",
+  "_npmVersion": "2.14.7",
+  "_nodeVersion": "4.2.0",
+  "_npmUser": {
+    "name": "coderofsalvation",
+    "email": "info@leon.vankammen.eu"
+  },
+  "maintainers": [
+    {
+      "name": "coderofsalvation",
+      "email": "info@leon.vankammen.eu"
+    }
+  ],
+  "dist": {
+    "shasum": "5f3759148d0f6973c017170ae42fb6ac12beb408",
+    "tarball": "http://registry.npmjs.org/iterate-with-delay/-/iterate-with-delay-1.0.23.tgz"
+  },
+  "_resolved": "https://registry.npmjs.org/iterate-with-delay/-/iterate-with-delay-1.0.23.tgz"
+}

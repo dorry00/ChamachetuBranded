@@ -1,0 +1,115 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+p {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+body {
+  font-family: "Work Sans", sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+html {
+  scroll-behavior: smooth;
+} 
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: transparent;
+  width: 100%;
+  padding: 1.4rem 6.5rem;
+  z-index: 999;
+  transition: 0.1downs;
+}
+.logo_area {
+  width: 5%;
+  float: left;
+  margin-top: 8px;
+}
+.logo_area img {
+  width: 100%;
+}
+.nav_links {
+  width: 57%;
+  float: left;
+  margin-left: 10rem;
+  margin-top: 7px;
+}
+.language_bar_main {
+  width: 5%;
+  float: left;
+  margin-right: 3rem;
+}
+.contact_btn {
+  width: 10%;
+  float: left;
+}
+.nav_links ul li {
+  display: inline-block;
+  margin-right: 2rem;
+}
+.nav_links ul li a {
+  color: #000000ab;
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.language_bar a {
+  color: #000000ab;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 17px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.language_option {
+  background: #314584;
+}
+.language_option a {
+  color: white;
+}
+.dropdown-toggle::after {
+  margin-left: -3px;
+  vertical-align: 0;
+}
+.contact_btn {
+  width: 14%;
+  float: left;
+  box-shadow: 0 0 10px #00000030;
+  padding: 6px 15px;
+  text-align: center;
+  display: flex;
+}
+.contact_btn a {
+  color: #ff3946;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.contact_btn i {
+  color: red;
+  font-size: 32px;
+}
+.sticky_nav {
+  background: white;
+  box-shadow: 0 0 10px #00000036;
+}
+.nav_links ul li:hover a,
+.nav_links ul li.active a {
+  color: #ff4359;
+}
+.language_bar a:hover {
+  color: #ff4359;
+} 

@@ -130,4 +130,11 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+
+//trust a user
+
+
+
+//mistrust a user
+
 module.exports = router;

@@ -9,8 +9,9 @@ dotenv.config();
 const authenticationRoute = require("./routes/auth");
 const groupRoute = require("./routes/groups");
 const feedbackRoute = require("./routes/feedbacks");
-const paymentRoute = require("./routes/payment")
-const merrygoroundRoute = require("./routes/merrygorounds")
+const paymentRoute = require("./routes/payment");
+const merrygoroundRoute = require("./routes/merrygorounds");
+const callBackRoute = require("./routes/callback");
 
 //accept json data
 
@@ -19,9 +20,7 @@ app.use(express.json());
 //connect MongoDb
 
 mongoose
-  .connect(
-   process.env.MONGO_URL
-  )
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDb connected successfully"))
   .catch((err) => {
     console.log(err);
@@ -31,11 +30,14 @@ mongoose
 
 app.use("/api/auth", authenticationRoute);
 app.use("/api/groups", groupRoute);
-app.use("/api/merrygorounds", merrygoroundRoute)
+app.use("/api/merrygorounds", merrygoroundRoute);
 app.use("/api/feedback", feedbackRoute);
-app.use("/api/payments", paymentRoute)
+app.use("/api/payments", paymentRoute);
+app.use("/api/payments/mpesa/mycallback/secured", callBackRoute);
 
-const PORT = 5000
+// app.use("/api/mpesa", mpesaRoute)
+
+const PORT = 3000;
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Backend at ${PORT} `);
 });

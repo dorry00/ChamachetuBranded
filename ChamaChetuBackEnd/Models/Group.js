@@ -21,18 +21,30 @@ const GroupSchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
-     rules:{
+    rules:{
         type:Array,
         default:[]
     }, 
     chairPerson:{
         type:String,
+        
      },
-     treasurer:{
-         type:String,
-        },
+     intrestRateforLoans:{
+         type:Number,
+     },
      secretary:{
          type:String,
+     },
+     onGoingMerryGoRound:{
+         type:String,
+     },
+     endedMerryGoRounds:{
+         type:Array,
+         default:[]
+     },
+     loans:{
+         type:Array,
+         default:[]
      }
 
       

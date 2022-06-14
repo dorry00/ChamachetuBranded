@@ -32,6 +32,9 @@ const MerrygoroundSchema = new mongoose.Schema(
       default:false,
 
     },
+    currentBeneficiary:{
+type:String,
+    },
     startDate:{
       type:Date,
         },

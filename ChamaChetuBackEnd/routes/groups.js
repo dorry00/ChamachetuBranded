@@ -14,7 +14,7 @@ router.post(
   "/create",
   body("groupname").notEmpty().withMessage("A group needs a name"),
   body("description").notEmpty().withMessage("description is required"),
-  verifyTokenAndAuthorisation,
+  // verifyTokenAndAuthorisation,
   async (req, res) => {
     //check for validation errors
     const errors = validationResult(req);

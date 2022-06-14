@@ -43,7 +43,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
 };
 
 const verifyTokenAndGroupChair = (req, res, next) => {
-    verifyToken(req, res, () => {
+  verifyToken(req, res, () => {
     if (req.user.isChairPerson) {
       const group = Group.findById(req.params.groupId);
       if (group.chairPerson === req.user._id) {

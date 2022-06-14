@@ -1,45 +1,59 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const meetingSchema = new mongoose.Schema({
-    groupId:{
-        type:String,
-        required:true,
-    },   
-    amount:{
-        type:Number,
-        required:true,
-    }, 
-    guarantorss:{
-        type:Array,
-        default:[],
-    }, 
-    intrest:{
-        type:Number
+const loanSchema = new mongoose.Schema(
+  {
+    groupId: {
+      type: String,
+      required: true,
     },
-    userId:{
-        type:String,
-        required:true,
-           },
-    borrowDate:{
-        type:Date,
-        required:true
-          },
+    amountRequested: {
+      type: Number,
+      required: true,
+    },
+    guarantors: {
+      type: Array,
+      default: [],
+    },
+    intrestRate: {
+      type: Number,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    userId: {
+      type: String,
+      required: true,
+    },
+    borrowDate: {
+      type: Date,
+      required: true,
+    },
 
-    dueDate:{
-        type:Date,
-        required:true,
+    dueDate: {
+      type: Date,
+      required: true,
     },
-    loanGoal:{
-        type:Date,
-        required:true,
+    loanGoal: {
+      type: Date,
+      required: true,
     },
-    approved:{
+    approved: {
+      type: Boolean,
+      default: false,
+    },
+    loanRepaymentStatus:{
         type:Boolean,
-        default:false        
+        enum:['paid','pending','overdue']
+
     },
-    
-   
+    loanPenalty:{
+        type:Number,
+        default:0
+    }
+  },
+  { timestamps: true },
+  { collection: "loans" }
+);
 
-} ,  { timestamps: true }, { collection: "meetings" })
-
-module.exports = mongoose.Schema("Meeting", meetingSchema)
+module.exports = mongoose.Schema("Loan", loanSchema);
